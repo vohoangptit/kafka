@@ -1,0 +1,34 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "hoang.com.profile"
+    },
+    "jhipsterVersion": "5.7.0",
+    "applicationType": "microservice",
+    "baseName": "profile",
+    "packageName": "hoang.com.profile",
+    "packageFolder": "hoang/com/profile",
+    "serverPort": "8001",
+    "authenticationType": "uaa",
+    "uaaBaseName": "uaa",
+    "cacheProvider": "no",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NjlhYjRjNDBlNTIwZmEzZTk1MmM5NDY4ZjY4NTAzMzQ5ZGEzNjQwOWM1YWNmMzA0ODIyMjhiMjk4MGU0NmNhMTczOGVjMDI0ZGUwMzZlZmRiMTJjNGE0ZDRlOWNhNGQ3ZmFlNmQ1YTY4ZTQxOTJjYzhhYzcxMTAxZTkwZTg3OTI=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

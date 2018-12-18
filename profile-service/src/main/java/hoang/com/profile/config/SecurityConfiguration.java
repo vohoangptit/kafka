@@ -1,9 +1,9 @@
-package hoang.com.gateway.config;
+package hoang.com.profile.config;
 
-import hoang.com.gateway.config.oauth2.OAuth2JwtAccessTokenConverter;
-import hoang.com.gateway.config.oauth2.OAuth2Properties;
-import hoang.com.gateway.security.oauth2.OAuth2SignatureVerifierClient;
-import hoang.com.gateway.security.AuthoritiesConstants;
+import hoang.com.profile.config.oauth2.OAuth2JwtAccessTokenConverter;
+import hoang.com.profile.config.oauth2.OAuth2Properties;
+import hoang.com.profile.security.oauth2.OAuth2SignatureVerifierClient;
+import hoang.com.profile.security.AuthoritiesConstants;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.RestTemplateCustomizer;
@@ -18,8 +18,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -28,21 +26,18 @@ import org.springframework.web.client.RestTemplate;
 public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
     private final OAuth2Properties oAuth2Properties;
 
-    private final CorsFilter corsFilter;
-
-    public SecurityConfiguration(OAuth2Properties oAuth2Properties, CorsFilter corsFilter) {
+    public SecurityConfiguration(OAuth2Properties oAuth2Properties) {
         this.oAuth2Properties = oAuth2Properties;
-        this.corsFilter = corsFilter;
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-	        .csrf()
-	        .disable()
-	        .headers()
-	        .frameOptions()
-	        .disable()
+            .csrf()
+            .disable()
+            .headers()
+            .frameOptions()
+            .disable()
         .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

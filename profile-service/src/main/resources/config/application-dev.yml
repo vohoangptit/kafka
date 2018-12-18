@@ -17,7 +17,7 @@ logging:
     level:
         ROOT: DEBUG
         io.github.jhipster: DEBUG
-        hoang.com.uaa: DEBUG
+        hoang.com.profile: DEBUG
 
 eureka:
     instance:
@@ -41,36 +41,19 @@ spring:
     jackson:
         serialization:
             indent-output: true
-    cloud:
-        stream:
-            kafka:
-                binder:
-                    brokers: localhost
-                    zk-nodes: localhost
-            bindings:
-                output:
-                    destination: topic-jhipster
     data:
         mongodb:
             uri: mongodb://localhost:27017
-            database: uaa
+            database: profile
         elasticsearch:
             properties:
                 path:
                     home: target/elasticsearch
     mail:
-       host: smtp.gmail.com
-       port: 587
-       username: cicctools@gmail.com
-       password: zysvanyddjmtqecp
-       protocol: smtp
-       tls: true
-       auth: true
-       from: cicctools@gmail.com
-       properties.mail.smtp:
-           auth: true
-           starttls.enable: true
-           ssl.trust: smtp.gmail.com
+        host: localhost
+        port: 25
+        username:
+        password:
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
@@ -86,7 +69,7 @@ spring:
                 enabled: true
 
 server:
-    port: 9999
+    port: 8001
 
 # ===================================================================
 # JHipster specific properties
@@ -97,21 +80,24 @@ server:
 jhipster:
     http:
         version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
-    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
-    cors:
-        allowed-origins: "*"
-        allowed-methods: "*"
-        allowed-headers: "*"
-        exposed-headers: "Authorization,Link,X-Total-Count"
-        allow-credentials: true
-        max-age: 1800
+    # CORS is disabled by default on microservices, as you should access them through a gateway.
+    # If you want to enable it, please uncomment the configuration below.
+    # cors:
+        # allowed-origins: "*"
+        # allowed-methods: "*"
+        # allowed-headers: "*"
+        # exposed-headers: "Authorization,Link,X-Total-Count"
+        # allow-credentials: true
+        # max-age: 1800
     security:
         client-authorization:
+            access-token-uri: http://uaa/oauth/token
+            token-service-id: uaa
             client-id: internal
             client-secret: internal
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: cicctools@gmail.com
-        base-url: https://www.facebook.com/Vohoang841
+        from: profile@localhost
+        base-url: http://127.0.0.1:8001
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
@@ -126,16 +112,15 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
-uaa:
-    key-store:
-        name: config/tls/keystore.p12
-        password: password
-        alias: selfsigned
+oauth2:
+    signature-verification:
+        public-key-endpoint-uri: http://uaa/oauth/token_key
+        #ttl for public keys to verify JWT tokens (in ms)
+        ttl: 3600000
+        #max. rate at which public keys will be fetched (in ms)
+        public-key-refresh-rate-limit: 10000
     web-client-configuration:
-        # Access Token is valid for 5 mins
-        access-token-validity-in-seconds: 300
-        # Refresh Token is valid for 7 days
-        refresh-token-validity-in-seconds-for-remember-me: 604800
+        #keep in sync with UAA configuration
         client-id: web_app
         secret: changeit
 
