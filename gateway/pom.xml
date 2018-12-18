@@ -1152,4 +1152,9 @@
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>
+    <parent>
+    	<version>1.0</version>
+    	<artifactId>hoang.services.root-pom</artifactId>
+    	<groupId>hoang.com.services</groupId>
+    </parent>
 </project>

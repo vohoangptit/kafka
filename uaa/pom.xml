@@ -948,4 +948,9 @@
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>
+    <parent>
+    	<groupId>hoang.com.services</groupId>
+    	<artifactId>hoang.services.root-pom</artifactId>
+    	<version>1.0</version>
+    </parent>
 </project>
